@@ -5,7 +5,7 @@ def f(x: np.array):
     
 def gradient(f: function, x: np.array):
     h = 1e-4
-    w = np.zeros_like(x)
+    grad = np.zeros_like(x)
     
     for i in range(x.size):
         tmp = x[i]
@@ -17,7 +17,7 @@ def gradient(f: function, x: np.array):
         x[i] = tmp - h
         fxh2 = f(x)
         
-        grad = (fxh1 - fxh2) / (2 * h)
+        grad[i] = (fxh1 - fxh2) / (2 * h)
         x[i] = tmp
     return grad
     
