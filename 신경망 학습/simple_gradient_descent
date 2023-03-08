@@ -1,0 +1,31 @@
+import numpy as np
+
+def f(x: np.array):
+    return np.sum(x ** 2)
+    
+def gradient(f: function, x: np.array):
+    h = 1e-4
+    w = np.zeros_like(x)
+    
+    for i in range(x.size):
+        tmp = x[i]
+        
+        # x+h
+        x[i] = tmp + h
+        fxh1 = f(x)
+        # x-h
+        x[i] = tmp - h
+        fxh2 = f(x)
+        
+        grad = (fxh1 - fxh2) / (2 * h)
+        x[i] = tmp
+    return grad
+    
+def descent(f: function, x: np.array, lr=1e-1, step=100):
+    x = x    
+    
+    for _ in range(step):
+      grad = gradient(f, x)
+      x -= lr * grad
+    
+    return x
